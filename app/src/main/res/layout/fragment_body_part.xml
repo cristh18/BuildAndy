@@ -1,15 +1,28 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.tolodev.buildandy.BodyPartFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/iv_head"
+    <data>
+
+        <variable
+            name="bodyPartViewModel"
+            type="com.tolodev.buildandy.viewmodel.BodyPartViewModel" />
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/head1"
-        tools:src="@drawable/head1" />
+        tools:context="com.tolodev.buildandy.ui.fragments.BodyPartFragment">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/iv_andy_part"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/app_name"
+            android:onClick="@{() -> bodyPartViewModel.changeBodyPart.onNext(true)}"
+            app:imageId="@{bodyPartViewModel.andyImage}"
+            tools:src="@drawable/head2" />
+
+    </FrameLayout>
+
+</layout>
