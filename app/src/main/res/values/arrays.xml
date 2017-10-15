@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="heads">
+        <item>@drawable/head1</item>
+        <item>@drawable/head2</item>
+        <item>@drawable/head3</item>
+        <item>@drawable/head4</item>
+        <item>@drawable/head5</item>
+        <item>@drawable/head6</item>
+        <item>@drawable/head7</item>
+        <item>@drawable/head8</item>
+        <item>@drawable/head9</item>
+        <item>@drawable/head10</item>
+        <item>@drawable/head11</item>
+        <item>@drawable/head12</item>
+    </array>
+
+    <array name="bodies">
+        <item>@drawable/body1</item>
+        <item>@drawable/body2</item>
+        <item>@drawable/body3</item>
+        <item>@drawable/body4</item>
+        <item>@drawable/body5</item>
+        <item>@drawable/body6</item>
+        <item>@drawable/body7</item>
+        <item>@drawable/body8</item>
+        <item>@drawable/body9</item>
+        <item>@drawable/body10</item>
+        <item>@drawable/body11</item>
+        <item>@drawable/body12</item>
+    </array>
+
+    <array name="legs">
+        <item>@drawable/legs1</item>
+        <item>@drawable/legs2</item>
+        <item>@drawable/legs3</item>
+        <item>@drawable/legs4</item>
+        <item>@drawable/legs5</item>
+        <item>@drawable/legs6</item>
+        <item>@drawable/legs7</item>
+        <item>@drawable/legs8</item>
+        <item>@drawable/legs9</item>
+        <item>@drawable/legs10</item>
+        <item>@drawable/legs11</item>
+        <item>@drawable/legs12</item>
+    </array>
+</resources>
