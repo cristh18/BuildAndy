@@ -14,15 +14,15 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activityMainBinding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-        setupView()
+        activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        setupView(savedInstanceState)
     }
 
-    private fun setupView() {
-        addFragment(activityMainBinding.containerHead.id, BodyPartFragment.newInstance(0, AndyImageAssets.BodyPartType.HEAD.bodyPart))
-        addFragment(activityMainBinding.containerBody.id, BodyPartFragment.newInstance(0, AndyImageAssets.BodyPartType.BODY.bodyPart))
-        addFragment(activityMainBinding.containerLegs.id, BodyPartFragment.newInstance(0, AndyImageAssets.BodyPartType.LEGS.bodyPart))
+    private fun setupView(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+            addFragment(activityMainBinding.containerHead.id, BodyPartFragment.newInstance(0, AndyImageAssets.BodyPartType.HEAD.bodyPart))
+            addFragment(activityMainBinding.containerBody.id, BodyPartFragment.newInstance(0, AndyImageAssets.BodyPartType.BODY.bodyPart))
+            addFragment(activityMainBinding.containerLegs.id, BodyPartFragment.newInstance(0, AndyImageAssets.BodyPartType.LEGS.bodyPart))
+        }
     }
-
-
 }

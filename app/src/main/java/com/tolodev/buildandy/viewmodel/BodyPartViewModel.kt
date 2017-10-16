@@ -22,7 +22,14 @@ class BodyPartViewModel(application: Application?) : BaseViewModel(application) 
     var imageIndex: Int = 0
     var bodySection: Int = 0
 
-    fun handleSubscriptions() {
+    fun init(imageIndex: Int, bodySection: Int) {
+        this.imageIndex = imageIndex
+        this.bodySection = bodySection
+        getAndyBodyPartImage()
+        handleSubscriptions()
+    }
+
+    private fun handleSubscriptions() {
         bodyPartSubscriptions.add(changeAndyClothesDisposable())
     }
 
@@ -44,5 +51,12 @@ class BodyPartViewModel(application: Application?) : BaseViewModel(application) 
 
     fun getAndyBodyPartImage() {
         andyImage.set(AndyImageAssets.getBodyPartByPosition(imageIndex, bodySection))
+    }
+
+    fun unsubscribe() {
+        if (!bodyPartSubscriptions.isDisposed) {
+            bodyPartSubscriptions.clear()
+            bodyPartSubscriptions.dispose()
+        }
     }
 }

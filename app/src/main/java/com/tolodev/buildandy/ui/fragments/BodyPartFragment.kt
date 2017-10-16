@@ -21,8 +21,8 @@ class BodyPartFragment : Fragment() {
 
     companion object {
 
-        private val ARG_IMAGE_INDEX = "image_index"
-        private val ARG_BODY_PART_TYPE = "body_part_type"
+        val ARG_IMAGE_INDEX = "ARG_IMAGE_INDEX"
+        val ARG_BODY_PART_TYPE = "ARG_BODY_PART_TYPE"
 
         fun newInstance(imageIndex: Int, bodySection: Int): BodyPartFragment {
             val fragment = BodyPartFragment()
@@ -46,17 +46,16 @@ class BodyPartFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         bodyPartBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_body_part, container, false)
         bodyPartViewModel = ViewModelProviders.of(this).get(BodyPartViewModel::class.java)
+        if (savedInstanceState != null) {
+            imageIndex = savedInstanceState.getInt(ARG_IMAGE_INDEX)
+            bodySection = savedInstanceState.getInt(ARG_BODY_PART_TYPE)
+        }
         init()
         return bodyPartBinding.root
     }
 
     private fun init() {
-
-        bodyPartViewModel.imageIndex = imageIndex
-        bodyPartViewModel.bodySection = bodySection
-        bodyPartViewModel.getAndyBodyPartImage()
-
-        bodyPartViewModel.handleSubscriptions()
+        bodyPartViewModel.init(imageIndex, bodySection)
         bodyPartBinding.bodyPartViewModel = bodyPartViewModel
     }
 
@@ -67,6 +66,15 @@ class BodyPartFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
+        bodyPartViewModel.unsubscribe()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        if (outState != null) {
+            outState.putInt(ARG_IMAGE_INDEX, bodyPartViewModel.imageIndex)
+            outState.putInt(ARG_BODY_PART_TYPE, bodyPartViewModel.bodySection)
+        }
     }
 
 
