@@ -1,0 +1,39 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--<FrameLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--tools:context="com.tolodev.buildandy.ui.fragments.HomeFragment">-->
+
+        <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:id="@+id/rv_andy_images"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:clipToPadding="true"-->
+            <!--android:scrollbarStyle="outsideOverlay"-->
+            <!--android:scrollbars="vertical"-->
+            <!--app:layoutManager="android.support.v7.widget.GridLayoutManager"-->
+            <!--app:spanCount="3"-->
+            <!--tools:itemCount="5"-->
+            <!--tools:visibility="visible" />-->
+
+    <!--</FrameLayout>-->
+
+    <GridView
+        android:id="@+id/images_grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:columnWidth="180dp"
+        android:gravity="center"
+        android:horizontalSpacing="8dp"
+        android:numColumns="3"
+        android:padding="16dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="8dp">
+    </GridView>
+
+
+</layout>

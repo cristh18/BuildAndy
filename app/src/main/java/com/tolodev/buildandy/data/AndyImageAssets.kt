@@ -1,8 +1,8 @@
 package com.tolodev.buildandy.data
 
 import android.content.res.TypedArray
-import com.tolodev.buildandy.application.AndyApplication
 import com.tolodev.buildandy.R
+import com.tolodev.buildandy.application.AndyApplication
 
 class AndyImageAssets {
 
@@ -19,6 +19,32 @@ class AndyImageAssets {
             return AndyApplication.app.resources.obtainTypedArray(R.array.legs)
         }
 
+        fun getAll(): MutableList<Int> {
+
+            val heads: MutableList<Int> = getBodyPart(getHeads())
+            val bodies: MutableList<Int> = getBodyPart(getHeads())
+            val legs: MutableList<Int> = getBodyPart(getHeads())
+
+            val allImages: MutableList<Int> = mutableListOf()
+            allImages.addAll(heads)
+            allImages.addAll(bodies)
+            allImages.addAll(legs)
+
+            return allImages
+        }
+
+        fun getBodyPart(bodySection: TypedArray): MutableList<Int> {
+            var i = 0
+            val images: MutableList<Int> = mutableListOf()
+            val size = bodySection.length()
+            while (i < size) {
+                images.add(bodySection.getResourceId(i, -1))
+                i++
+            }
+            bodySection.recycle()
+            return images
+        }
+
         fun getBodyPartByPosition(position: Int, bodyPart: Int): Int {
             var i = 0
             val andyBodySection: TypedArray = getBodyPartType(bodyPart)
@@ -29,6 +55,7 @@ class AndyImageAssets {
                 }
                 i++
             }
+            andyBodySection.recycle()
             return andyBodySection.getResourceId(0, -1)
         }
 
