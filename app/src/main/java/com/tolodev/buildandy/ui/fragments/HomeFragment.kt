@@ -22,14 +22,13 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            mParam1 = arguments.getString(ARG_PARAM1)
-            mParam2 = arguments.getString(ARG_PARAM2)
+        arguments?.let {
+            mParam1 = it.getString(ARG_PARAM1)
+            mParam2 = it.getString(ARG_PARAM2)
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         homeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
         // Get a reference to the GridView in the fragment_master_list xml layout file

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 
-class AndyAdapter(private val context: Context, private val andyImageIds: MutableList<Int>) : BaseAdapter() {
+class AndyAdapter(private val context: Context?, private val andyImageIds: MutableList<Int>) : BaseAdapter() {
 
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
