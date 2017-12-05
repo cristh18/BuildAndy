@@ -28,7 +28,7 @@ class AndyAdapter(private val context: Context?, private val andyImageIds: Mutab
     }
 
     override fun getItem(position: Int): Any {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return andyImageIds[position]
     }
 
     override fun getItemId(position: Int): Long {
