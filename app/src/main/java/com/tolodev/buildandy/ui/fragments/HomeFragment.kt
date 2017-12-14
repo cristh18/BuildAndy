@@ -1,5 +1,8 @@
 package com.tolodev.buildandy.ui.fragments
 
+import android.app.Activity
+import android.arch.lifecycle.ViewModelProviders
+import android.content.ClipData
 import android.content.Context
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -11,8 +14,10 @@ import android.widget.AdapterView
 import com.tolodev.buildandy.R
 import com.tolodev.buildandy.data.AndyImageAssets
 import com.tolodev.buildandy.databinding.FragmentHomeBinding
+import com.tolodev.buildandy.ui.activities.MainActivity
 import com.tolodev.buildandy.ui.adapter.AndyAdapter
 import com.tolodev.buildandy.util.DeviceUtil
+import com.tolodev.buildandy.viewmodel.SharedViewModel
 
 class HomeFragment : Fragment(), AdapterView.OnItemClickListener {
 
@@ -40,7 +45,14 @@ class HomeFragment : Fragment(), AdapterView.OnItemClickListener {
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         val itemSelected = adapter.getItem(position)
-        homeFragmentListener.imageSelected(itemSelected as Int, position)
+
+        if (DeviceUtil.isTablet()) {
+            val sharedViewModel: SharedViewModel = ViewModelProviders.of(activity as MainActivity).get(SharedViewModel::class.java)
+            val item: ClipData.Item = ClipData.Item(position.toString())
+            sharedViewModel.select(item)
+        } else {
+            homeFragmentListener.imageSelected(itemSelected as Int, position)
+        }
     }
 
     override fun onAttach(context: Context?) {
