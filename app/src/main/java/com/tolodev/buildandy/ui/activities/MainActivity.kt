@@ -15,8 +15,8 @@ class MainActivity : BaseActivity(), HomeFragment.HomeFragmentListener {
         val BODY_INDEX = "BODY_INDEX"
     }
 
-    lateinit var activityMainBinding: ActivityMainBinding
-    var bodyPartIndexSelected = 0
+    private lateinit var activityMainBinding: ActivityMainBinding
+    private var bodyPartIndexSelected = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
