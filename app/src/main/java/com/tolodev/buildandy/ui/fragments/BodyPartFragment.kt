@@ -1,5 +1,6 @@
 package com.tolodev.buildandy.ui.fragments
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.databinding.DataBindingUtil
@@ -10,7 +11,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.tolodev.buildandy.R
 import com.tolodev.buildandy.databinding.FragmentBodyPartBinding
+import com.tolodev.buildandy.ui.activities.MainActivity
+import com.tolodev.buildandy.util.DeviceUtil
 import com.tolodev.buildandy.viewmodel.BodyPartViewModel
+import com.tolodev.buildandy.viewmodel.SharedViewModel
 
 class BodyPartFragment : Fragment() {
 
@@ -40,6 +44,17 @@ class BodyPartFragment : Fragment() {
             imageIndex = it.getInt(ARG_IMAGE_INDEX)
             bodySection = it.getInt(ARG_BODY_PART_TYPE)
         }
+        handleBodyPartNotifications()
+    }
+
+    private fun handleBodyPartNotifications() {
+        if (DeviceUtil.isTablet()) {
+            val sharedViewModel: SharedViewModel = ViewModelProviders.of(activity as MainActivity).get(SharedViewModel::class.java)
+            sharedViewModel.getSelected().observe(this, Observer { t ->
+                val indexSelected = t?.text.toString().toInt()
+                updateUI(indexSelected, bodySection)
+            })
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -58,6 +73,9 @@ class BodyPartFragment : Fragment() {
         bodyPartBinding.bodyPartViewModel = bodyPartViewModel
     }
 
+    private fun updateUI(imageIndex: Int, bodySection: Int) {
+        bodyPartViewModel.init(imageIndex, bodySection)
+    }
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
