@@ -36,14 +36,13 @@ class BodyPartFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            imageIndex = arguments.getInt(ARG_IMAGE_INDEX)
-            bodySection = arguments.getInt(ARG_BODY_PART_TYPE)
+        arguments?.let {
+            imageIndex = it.getInt(ARG_IMAGE_INDEX)
+            bodySection = it.getInt(ARG_BODY_PART_TYPE)
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         bodyPartBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_body_part, container, false)
         bodyPartViewModel = ViewModelProviders.of(this).get(BodyPartViewModel::class.java)
         if (savedInstanceState != null) {
@@ -69,13 +68,9 @@ class BodyPartFragment : Fragment() {
         bodyPartViewModel.unsubscribe()
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
+    override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        if (outState != null) {
-            outState.putInt(ARG_IMAGE_INDEX, bodyPartViewModel.imageIndex)
-            outState.putInt(ARG_BODY_PART_TYPE, bodyPartViewModel.bodySection)
-        }
+        outState.putInt(ARG_IMAGE_INDEX, bodyPartViewModel.imageIndex)
+        outState.putInt(ARG_BODY_PART_TYPE, bodyPartViewModel.bodySection)
     }
-
-
 }

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 
-class AndyAdapter(private val context: Context, private val andyImageIds: MutableList<Int>) : BaseAdapter() {
+class AndyAdapter(private val context: Context?, private val andyImageIds: MutableList<Int>) : BaseAdapter() {
 
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -28,7 +28,7 @@ class AndyAdapter(private val context: Context, private val andyImageIds: Mutabl
     }
 
     override fun getItem(position: Int): Any {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return andyImageIds[position]
     }
 
     override fun getItemId(position: Int): Long {

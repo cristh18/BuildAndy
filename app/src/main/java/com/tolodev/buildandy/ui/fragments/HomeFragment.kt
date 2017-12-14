@@ -7,63 +7,51 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.Toast
 import com.tolodev.buildandy.R
 import com.tolodev.buildandy.data.AndyImageAssets
 import com.tolodev.buildandy.databinding.FragmentHomeBinding
 import com.tolodev.buildandy.ui.adapter.AndyAdapter
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), AdapterView.OnItemClickListener {
 
     private lateinit var homeBinding: FragmentHomeBinding
+    private lateinit var adapter: AndyAdapter
+    private lateinit var homeFragmentListener: HomeFragmentListener
 
-    // TODO: Rename and change types of parameters
-    private var mParam1: String? = null
-    private var mParam2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            mParam1 = arguments.getString(ARG_PARAM1)
-            mParam2 = arguments.getString(ARG_PARAM2)
-        }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        homeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        homeBinding.fragment = this
+        setupView()
+        return homeBinding.root
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        homeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+    private fun setupView() {
+        adapter = AndyAdapter(context, AndyImageAssets.getAll())
+        homeBinding.imagesGridView.adapter = adapter
+        homeBinding.imagesGridView.onItemClickListener = this
+    }
 
-        // Get a reference to the GridView in the fragment_master_list xml layout file
-
-
-        // Create the adapter
-        // This adapter takes in the context and an ArrayList of ALL the image resources to display
-        val mAdapter = AndyAdapter(context, AndyImageAssets.getAll())
-
-        // Set the adapter on the GridView
-        homeBinding.imagesGridView.adapter = mAdapter
-
-        return homeBinding.root
+    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        val itemSelected = adapter.getItem(position)
+        homeFragmentListener.imageSelected(itemSelected as Int, position)
     }
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-    }
-
-    companion object {
-        private val ARG_PARAM1 = "param1"
-        private val ARG_PARAM2 = "param2"
-
-        fun newInstance(param1: String, param2: String): HomeFragment {
-            val fragment = HomeFragment()
-            val args = Bundle()
-            args.putString(ARG_PARAM1, param1)
-            args.putString(ARG_PARAM2, param2)
-            fragment.arguments = args
-            return fragment
+        context?.let {
+            homeFragmentListener = context as HomeFragmentListener
         }
+    }
+
+    fun continueClick(){
+        homeFragmentListener.showAndy()
+    }
+
+    interface HomeFragmentListener {
+        fun imageSelected(imageSelected: Int, index : Int)
+
+        fun showAndy()
     }
 }

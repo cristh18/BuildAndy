@@ -22,8 +22,8 @@ class AndyImageAssets {
         fun getAll(): MutableList<Int> {
 
             val heads: MutableList<Int> = getBodyPart(getHeads())
-            val bodies: MutableList<Int> = getBodyPart(getHeads())
-            val legs: MutableList<Int> = getBodyPart(getHeads())
+            val bodies: MutableList<Int> = getBodyPart(getBodies())
+            val legs: MutableList<Int> = getBodyPart(getLegs())
 
             val allImages: MutableList<Int> = mutableListOf()
             allImages.addAll(heads)
@@ -33,7 +33,7 @@ class AndyImageAssets {
             return allImages
         }
 
-        fun getBodyPart(bodySection: TypedArray): MutableList<Int> {
+        private fun getBodyPart(bodySection: TypedArray): MutableList<Int> {
             var i = 0
             val images: MutableList<Int> = mutableListOf()
             val size = bodySection.length()

@@ -7,6 +7,6 @@ import android.support.v4.content.ContextCompat
 class DrawableUtil {
 
     companion object {
-        fun getDrawableFromResourceId(context:Context, imageId: Int): Drawable = ContextCompat.getDrawable(context, imageId)
+        fun getDrawableFromResourceId(context: Context, imageId: Int): Drawable? = ContextCompat.getDrawable(context, imageId)
     }
 }

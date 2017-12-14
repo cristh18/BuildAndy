@@ -10,10 +10,10 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 
-class BodyPartViewModel(application: Application?) : BaseViewModel(application) {
+class BodyPartViewModel(application: Application) : BaseViewModel(application) {
 
 
-    var bodyPartSubscriptions: CompositeDisposable = CompositeDisposable()
+    private var bodyPartSubscriptions: CompositeDisposable = CompositeDisposable()
     var changeBodyPart = BehaviorSubject.create<Boolean>()
 
 
@@ -39,7 +39,7 @@ class BodyPartViewModel(application: Application?) : BaseViewModel(application) 
                 .observeOn(AndroidSchedulers.mainThread())
                 .filter({ t -> t })
                 .subscribeBy(  // named arguments for lambda Subscribers
-                        onNext = { b: Boolean? ->
+                        onNext = {
                             imageIndex += 1
                             andyImage.set(AndyImageAssets.getNextImage(imageIndex, bodySection))
                         },
@@ -49,7 +49,7 @@ class BodyPartViewModel(application: Application?) : BaseViewModel(application) 
 
     override fun getViewModelName(): String = BodyPartViewModel::class.java.name
 
-    fun getAndyBodyPartImage() {
+    private fun getAndyBodyPartImage() {
         andyImage.set(AndyImageAssets.getBodyPartByPosition(imageIndex, bodySection))
     }
 

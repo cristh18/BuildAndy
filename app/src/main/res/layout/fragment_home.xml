@@ -3,37 +3,71 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <!--<FrameLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--tools:context="com.tolodev.buildandy.ui.fragments.HomeFragment">-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--tools:context="com.tolodev.buildandy.ui.fragments.HomeFragment">-->
 
-        <!--<android.support.v7.widget.RecyclerView-->
-            <!--android:id="@+id/rv_andy_images"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:clipToPadding="true"-->
-            <!--android:scrollbarStyle="outsideOverlay"-->
-            <!--android:scrollbars="vertical"-->
-            <!--app:layoutManager="android.support.v7.widget.GridLayoutManager"-->
-            <!--app:spanCount="3"-->
-            <!--tools:itemCount="5"-->
-            <!--tools:visibility="visible" />-->
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/rv_andy_images"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:clipToPadding="true"-->
+    <!--android:scrollbarStyle="outsideOverlay"-->
+    <!--android:scrollbars="vertical"-->
+    <!--app:layoutManager="android.support.v7.widget.GridLayoutManager"-->
+    <!--app:spanCount="3"-->
+    <!--tools:itemCount="5"-->
+    <!--tools:visibility="visible" />-->
 
     <!--</FrameLayout>-->
 
-    <GridView
-        android:id="@+id/images_grid_view"
+    <data>
+
+        <variable
+            name="fragment"
+            type="com.tolodev.buildandy.ui.fragments.HomeFragment" />
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:columnWidth="180dp"
-        android:gravity="center"
-        android:horizontalSpacing="8dp"
-        android:numColumns="3"
-        android:padding="16dp"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="8dp">
-    </GridView>
+        android:layout_height="match_parent">
+
+        <GridView
+            android:id="@+id/images_grid_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:adjustViewBounds="true"
+            android:columnWidth="180dp"
+            android:gravity="center"
+            android:horizontalSpacing="8dp"
+            android:numColumns="3"
+            android:padding="16dp"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/button_next"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="16dp"
+            android:onClick="@{() -> fragment.continueClick()}"
+            android:text="Next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Next" />
+
+    </android.support.constraint.ConstraintLayout>
 
 
 </layout>
